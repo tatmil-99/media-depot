@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.table-body {
+  border: 1px solid black;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  width: 50px;
+  padding-top: 4px 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+td {
+  border: 1px solid black;
+}
