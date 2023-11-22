@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  border: 1px solid red;
+  margin: 0;
 }
 
 body {
@@ -7,17 +9,29 @@ body {
   flex-direction: column;
   align-items: flex-start;
   min-height: 100vh;
+  min-width: 100vw;
 }
 
-.table-body {
-  border: 1px solid black;
+header,
+main,
+footer {
+  width: 100%;
+}
+
+h1,
+h2 {
+  padding: 15px;
+}
+
+table {
+  min-width: 750px;
   border-spacing: 0;
   border-collapse: collapse;
 }
 
 th,
 td {
-  width: 50px;
+  width: 150px;
   padding-top: 4px 6px;
   text-align: center;
   white-space: nowrap;
