@@ -16,11 +16,32 @@ header,
 main,
 footer {
   width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-h1,
+h1 {
+  padding: 25px 0px 25px 0px;
+}
+
 h2 {
-  padding: 15px;
+  padding: 5px
+}
+
+.subtitle-container {
+  width: 750px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.subtitle-btn {
+  height: 35px;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 table {
@@ -39,4 +60,13 @@ td {
 
 td {
   border: 1px solid black;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+p {
+  margin: 0;
 }
