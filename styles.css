@@ -16,8 +16,13 @@ header,
 main,
 footer {
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+}
+
+header {
+  background-color: rgb(211, 211, 211);
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -35,7 +40,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
 }
 
 .subtitle-btn {
