@@ -92,6 +92,11 @@ footer {
   bottom: 0;
 }
 
-p {
+/* p {
   margin: 0;
+} */
+
+.credits {
+  text-align: center;
+  padding: 15px 0px 15px 0px;
 }
