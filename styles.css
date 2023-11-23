@@ -16,8 +16,6 @@ header,
 main,
 footer {
   width: 100%;
-  /* margin-top: 20px;
-  margin-bottom: 20px; */
 }
 
 header {
@@ -69,7 +67,6 @@ h2 {
 }
 
 table {
-  /* min-width: 750px; */
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
@@ -81,9 +78,6 @@ td {
   padding-top: 4px 6px;
   text-align: center;
   white-space: nowrap;
-}
-
-td {
   border: 1px solid black;
 }
 
@@ -91,10 +85,6 @@ footer {
   position: absolute;
   bottom: 0;
 }
-
-/* p {
-  margin: 0;
-} */
 
 .credits {
   text-align: center;
