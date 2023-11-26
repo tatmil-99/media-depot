@@ -17,7 +17,7 @@ header,
 main,
 footer {
   width: 100%;
-  filter: blur(4px) brightness(40%);
+  /* filter: blur(4px) brightness(40%); */
 }
 
 h1 {
@@ -87,21 +87,20 @@ td {
 }
 
 .form-container {
-  /* display: none; */
-  display: flex;
+  display: none;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 1;
   height: 600px;
   width: 500px;
-  background-color: red;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-  box-shadow: 0px 0px 8px rgb(125, 125, 125);
+  /* background-color: white;
+  box-shadow: 0px 0px 8px rgb(125, 125, 125); */
 }
 
 .form-container>p {
