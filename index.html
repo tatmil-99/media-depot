@@ -11,26 +11,50 @@
     <div class="form-container">
         <h2>New Media</h2>
         <form action="">
-            <label>Title <input type="text" name="title"></label>
-            <label>Author <input type="text" name="author"></label>
-            <label>Type <select name="type">
-                    <option value="">--Please choose an option--</option>
-                    <option value="book">Book</option>
-                    <option value="article">Article</option>
-                    <option value="film">Film</option>
-                    <option value="show">Show</option>
-                    <option value="podcast">Podcast</option>
-                    <option value="audiobook">Audiobook</option>
-                    <option value="other">Other</option>
-                </select></label>
-            <label>Status <select name="status">
-                    <option value="">--Please choose an option--</option>
-                    <option value="not-started">Not started</option>
-                    <option value="in-progress">In progress</option>
-                    <option value="done">Done</option>
-                </select></label>
-            <label>Link <input type="url" name="link"></label>
-            <button>Create</button>
+            <div class="form-field">
+                <div><label for="title">Title</label></div>
+                <div><input type="text" id="title" name="title"></div>
+            </div>
+
+            <div class="form-field">
+                <div><label for="author">Author</label></div>
+                <div><input type="text" id="author" name="author"></div>
+            </div>
+
+            <div class="form-field">
+                <div><label for="type">Type</label></div>
+                <div>
+                    <select id="type" name="type">
+                        <option value="">--Please choose an option--</option>
+                        <option value="book">Book</option>
+                        <option value="article">Article</option>
+                        <option value="film">Film</option>
+                        <option value="show">Show</option>
+                        <option value="podcast">Podcast</option>
+                        <option value="audiobook">Audiobook</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div><label for="status">Status</label></div>
+                <div>
+                    <select id="status" name="status">
+                        <option value="">--Please choose an option--</option>
+                        <option value="not-started">Not started</option>
+                        <option value="in-progress">In progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div><label for="link">Link</label></div>
+                <div><input type="url" id="link" name="link"></div>
+            </div>
+
+            <button class="form-btn">Create</button>
         </form>
     </div>
 

@@ -17,6 +17,7 @@ header,
 main,
 footer {
   width: 100%;
+  filter: blur(4px) brightness(40%);
 }
 
 h1 {
@@ -61,7 +62,8 @@ h2 {
   margin-top: 15px;
 }
 
-.new-btn {
+.new-btn,
+.form-btn {
   padding: 6px 24px;
 }
 
@@ -86,6 +88,10 @@ td {
 
 .form-container {
   /* display: none; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
   height: 600px;
   width: 500px;
@@ -94,6 +100,33 @@ td {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0px 0px 8px rgb(125, 125, 125);
+}
+
+.form-container>h2 {
+  text-align: center;
+}
+
+form {
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.form-field {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-field>div>input,
+.form-field>div>select {
+  width: 230px;
+  height: 25px;
 }
 
 footer {
