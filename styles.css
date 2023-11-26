@@ -69,11 +69,6 @@ h2 {
   width: 75%;
 }
 
-/* .intro-container,
-.table-container {
-  z-index: 1;
-} */
-
 table {
   width: 100%;
   border-spacing: 0;
@@ -90,7 +85,7 @@ td {
 }
 
 .form-container {
-  display: none;
+  /* display: none; */
   z-index: 1;
   height: 600px;
   width: 500px;
