@@ -10,6 +10,7 @@ body {
   align-items: flex-start;
   min-height: 100vh;
   min-width: 100vw;
+  background-color: white;
 }
 
 header,
@@ -19,7 +20,7 @@ footer {
 }
 
 header {
-  background-color: rgb(211, 211, 211);
+  /* background-color: rgb(211, 211, 211); */
   margin-bottom: 50px;
 }
 
@@ -31,6 +32,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 1000px;
+  overflow: scroll;
 }
 
 .intro-container {
@@ -66,6 +69,11 @@ h2 {
   width: 75%;
 }
 
+/* .intro-container,
+.table-container {
+  z-index: 1;
+} */
+
 table {
   width: 100%;
   border-spacing: 0;
@@ -81,10 +89,18 @@ td {
   border: 1px solid black;
 }
 
-footer {
+.form-container {
+  z-index: 1;
+  height: 100vh;
+  width: 40vw;
+  background-color: red;
+  position: absolute;
+}
+
+/* footer {
   position: absolute;
   bottom: 0;
-}
+} */
 
 .credits {
   text-align: center;
