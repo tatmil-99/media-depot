@@ -15,14 +15,16 @@ function Media(title, author, type, status, link) {
 }
 
 function handleCreation(e) {
-  const title = document.querySelector(".title").value;
-  const author = document.querySelector(".author").value;
-  const type = document.querySelector(".type").value;
-  const status = document.querySelector(".status").value;
-  const link = document.querySelector(".link").value;
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const type = document.querySelector("#type").value;
+  const status = document.querySelector("#status").value;
+  const link = document.querySelector("#link").value;
 
   e.preventDefault();
-  console.log(e);
+
+  const media = new Media(title, author, type, status, link);
+  console.log(media);
 }
 
 function handleForm(e) {
