@@ -3,7 +3,8 @@ const closeBtn = document.querySelector(".close-btn");
 newBtn.addEventListener("click", handleForm);
 closeBtn.addEventListener("click", handleForm);
 
-const formBtn = document.querySelector(".form-btn");
+const createBtn = document.querySelector(".form-btn");
+createBtn.addEventListener("click", handleCreation);
 
 function Media(title, author, type, status, link) {
   this.title = title;
@@ -11,6 +12,17 @@ function Media(title, author, type, status, link) {
   this.type = type;
   this.status = status;
   this.link = link;
+}
+
+function handleCreation(e) {
+  const title = document.querySelector(".title").value;
+  const author = document.querySelector(".author").value;
+  const type = document.querySelector(".type").value;
+  const status = document.querySelector(".status").value;
+  const link = document.querySelector(".link").value;
+
+  e.preventDefault();
+  console.log(e);
 }
 
 function handleForm(e) {
