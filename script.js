@@ -3,6 +3,16 @@ const closeBtn = document.querySelector(".close-btn");
 newBtn.addEventListener("click", handleForm);
 closeBtn.addEventListener("click", handleForm);
 
+const formBtn = document.querySelector(".form-btn");
+
+function Media(title, author, type, status, link) {
+  this.title = title;
+  this.author = author;
+  this.type = type;
+  this.status = status;
+  this.link = link;
+}
+
 function handleForm(e) {
   const form = document.querySelector(".form-container");
   const container = document.querySelector(".container");
