@@ -29,6 +29,18 @@ function Media(title, author, type, status, link) {
   this.link = link;
 }
 
+function displayRow(...media) {
+  let newTableBody = document.querySelector("tbody");
+  let newRow = document.createElement("tr");
+
+  media.forEach((input) => {
+    let newData = document.createElement("td");
+    newData.textContent = input;
+    newRow.appendChild(newData);
+    newTableBody.appendChild(newRow);
+  });
+}
+
 function handleCreation(e) {
   const form = document.querySelector(".media-form");
   const title = document.querySelector("#title").value;
@@ -41,7 +53,8 @@ function handleCreation(e) {
 
   const media = new Media(title, author, type, status, link);
   mediaList.push(media);
-  console.log(mediaList);
+
+  displayRow(title, author, type, status, link);
 
   form.reset();
 }
