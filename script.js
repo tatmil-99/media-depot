@@ -29,16 +29,27 @@ function Media(title, author, type, status, link) {
   this.link = link;
 }
 
-function displayRow(...media) {
-  let newTableBody = document.querySelector("tbody");
-  let newRow = document.createElement("tr");
+function displayRow(...mediaList) {
+  let tableBody = document.querySelector("tbody");
+  let tableRow = document.createElement("tr");
+  let linkElement = document.createElement("a");
 
-  media.forEach((input) => {
-    let newData = document.createElement("td");
-    newData.textContent = input;
-    newRow.appendChild(newData);
-    newTableBody.appendChild(newRow);
-  });
+  for (let i = 0; i <= mediaList.length - 1; i++) {
+    let tableCell = document.createElement("td");
+
+    // make media input a link if it's the last element
+    if (i == mediaList.length - 1) {
+      linkElement.href = mediaList[i];
+      linkElement.target = "_blank";
+      linkElement.textContent = mediaList[i];
+      tableCell.appendChild(linkElement);
+    } else {
+      tableCell.textContent = mediaList[i];
+    }
+
+    tableRow.appendChild(tableCell);
+    tableBody.appendChild(tableRow);
+  }
 }
 
 function handleCreation(e) {
