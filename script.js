@@ -36,6 +36,7 @@ function displayRow(...mediaList) {
 
   for (let i = 0; i <= mediaList.length - 1; i++) {
     let tableCell = document.createElement("td");
+    let editField = document.createElement("input");
 
     // make media input a link if it's the last element
     if (i == mediaList.length - 1) {
@@ -47,6 +48,11 @@ function displayRow(...mediaList) {
       tableCell.textContent = mediaList[i];
     }
 
+    editField.classList.add("edit-field");
+    editField.style.display = "none";
+    editField.type = "text";
+
+    tableCell.appendChild(editField);
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
