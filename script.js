@@ -34,8 +34,10 @@ function Media(title, author, type, status, link) {
 function editCell(e) {
   let cell = e.target;
   let input = document.createElement("input");
+
   input.classList.add("edit-field");
   input.type = "text";
+  input.autofocus = "autofocus";
   input.value = cell.textContent;
 
   cell.replaceChildren(input);
@@ -48,7 +50,6 @@ function displayRow(...mediaList) {
 
   for (let i = 0; i <= mediaList.length - 1; i++) {
     let tableCell = document.createElement("td");
-
     // logic for associating input with cells
     if (i == mediaList.length - 1) {
       linkElement.href = mediaList[i];
