@@ -146,6 +146,10 @@ form {
   height: 25px;
 }
 
+option {
+  text-align: center;
+}
+
 footer {
   position: absolute;
   bottom: 0;

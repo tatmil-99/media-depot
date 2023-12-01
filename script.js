@@ -43,24 +43,54 @@ function editCell(e) {
   cell.replaceChildren(input);
 }
 
+function filterNodes(element, fieldInput) {
+  let fileredChild;
+
+  let nodes = element.childNodes;
+
+  for (let node of nodes.values()) {
+    if (node.value == fieldInput) {
+      fileredChild = element.removeChild(node);
+    }
+  }
+
+  element.prepend(fileredChild);
+
+  return element;
+}
+
 function displayRow(...mediaList) {
   let tableBody = document.querySelector("tbody");
   let tableRow = document.createElement("tr");
   let linkElement = document.createElement("a");
 
+  let type = document.querySelector("#type");
+  let typeClone = type.cloneNode(true);
+  let filteredType;
+  let status = document.querySelector("#status");
+  let statusClone = status.cloneNode(true);
+
   for (let i = 0; i <= mediaList.length - 1; i++) {
     let tableCell = document.createElement("td");
+
     // logic for associating input with cells
     if (i == mediaList.length - 1) {
       linkElement.href = mediaList[i];
       linkElement.target = "_blank";
       linkElement.textContent = mediaList[i];
       tableCell.appendChild(linkElement);
+    } else if (i == 2) {
+      typeClone.id = "";
+      filteredType = filterNodes(typeClone, mediaList[i]);
+      tableCell.appendChild(filteredType);
+    } else if (i == 3) {
+      statusClone.id = "";
+      tableCell.appendChild(statusClone);
     } else {
       tableCell.textContent = mediaList[i];
     }
 
-    tableCell.addEventListener("click", editCell);
+    // tableCell.addEventListener("click", editCell);
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
