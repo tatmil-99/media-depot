@@ -89,6 +89,10 @@ td {
   border: 1px solid black;
 }
 
+td {
+  cursor: default;
+}
+
 .form-container {
   display: none;
   /* display: flex; */

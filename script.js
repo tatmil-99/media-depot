@@ -29,6 +29,10 @@ function Media(title, author, type, status, link) {
   this.link = link;
 }
 
+function editCell(e) {
+  console.log(e);
+}
+
 function displayRow(...mediaList) {
   let tableBody = document.querySelector("tbody");
   let tableRow = document.createElement("tr");
@@ -38,7 +42,7 @@ function displayRow(...mediaList) {
     let tableCell = document.createElement("td");
     let editField = document.createElement("input");
 
-    // make media input a link if it's the last element
+    // logic for associating input with cells
     if (i == mediaList.length - 1) {
       linkElement.href = mediaList[i];
       linkElement.target = "_blank";
@@ -51,6 +55,8 @@ function displayRow(...mediaList) {
     editField.classList.add("edit-field");
     editField.style.display = "none";
     editField.type = "text";
+
+    tableCell.addEventListener("click", editCell);
 
     tableCell.appendChild(editField);
     tableRow.appendChild(tableCell);
