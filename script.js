@@ -1,9 +1,11 @@
 const newBtn = document.querySelector(".new-btn");
-const closeBtn = document.querySelector(".close-btn");
 newBtn.addEventListener("click", handleForm);
+
+const closeBtn = document.querySelector(".close-btn");
 closeBtn.addEventListener("click", handleForm);
 
 const mediaList = [];
+
 const createBtn = document.querySelector(".form-btn");
 createBtn.addEventListener("click", handleCreation);
 
@@ -30,7 +32,13 @@ function Media(title, author, type, status, link) {
 }
 
 function editCell(e) {
-  console.log(e);
+  let cell = e.target;
+  let input = document.createElement("input");
+  input.classList.add("edit-field");
+  input.type = "text";
+  input.value = cell.textContent;
+
+  cell.replaceChildren(input);
 }
 
 function displayRow(...mediaList) {
@@ -40,7 +48,6 @@ function displayRow(...mediaList) {
 
   for (let i = 0; i <= mediaList.length - 1; i++) {
     let tableCell = document.createElement("td");
-    let editField = document.createElement("input");
 
     // logic for associating input with cells
     if (i == mediaList.length - 1) {
@@ -52,13 +59,7 @@ function displayRow(...mediaList) {
       tableCell.textContent = mediaList[i];
     }
 
-    editField.classList.add("edit-field");
-    editField.style.display = "none";
-    editField.type = "text";
-
     tableCell.addEventListener("click", editCell);
-
-    tableCell.appendChild(editField);
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
