@@ -43,46 +43,41 @@ function editCell(e) {
   cell.replaceChildren(input);
 }
 
-function filterNodes(element, fieldInput) {
-  let fileredChild;
+function preselect(element, option) {
+  const nodes = element.childNodes;
 
-  let nodes = element.childNodes;
-
-  for (let node of nodes.values()) {
-    if (node.value == fieldInput) {
-      fileredChild = element.removeChild(node);
+  nodes.forEach((node) => {
+    if (node.value == option) {
+      node.selected = true;
     }
-  }
+  });
 
-  element.prepend(fileredChild);
-
+  element.id = ""; // prevents duplicate id(s) of form menus
   return element;
 }
 
 function displayRow(...mediaList) {
-  let tableBody = document.querySelector("tbody");
-  let tableRow = document.createElement("tr");
-  let linkElement = document.createElement("a");
+  const tableBody = document.querySelector("tbody");
+  const tableRow = document.createElement("tr");
+  const linkElement = document.createElement("a");
 
-  let type = document.querySelector("#type");
-  let typeClone = type.cloneNode(true);
-  let filteredType;
-  let status = document.querySelector("#status");
-  let statusClone = status.cloneNode(true);
+  const type = document.querySelector("#type");
+  const typeClone = type.cloneNode(true);
+  const status = document.querySelector("#status");
+  const statusClone = status.cloneNode(true);
 
+  // logic for associating input with cells
   for (let i = 0; i <= mediaList.length - 1; i++) {
-    let tableCell = document.createElement("td");
+    const tableCell = document.createElement("td");
 
-    // logic for associating input with cells
     if (i == mediaList.length - 1) {
       linkElement.href = mediaList[i];
       linkElement.target = "_blank";
       linkElement.textContent = mediaList[i];
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
-      typeClone.id = "";
-      filteredType = filterNodes(typeClone, mediaList[i]);
-      tableCell.appendChild(filteredType);
+      let selectedType = preselect(typeClone, mediaList[i]);
+      tableCell.appendChild(selectedType);
     } else if (i == 3) {
       statusClone.id = "";
       tableCell.appendChild(statusClone);
