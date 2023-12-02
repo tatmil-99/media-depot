@@ -70,10 +70,11 @@ function displayRow(...mediaList) {
   const tableRow = document.createElement("tr");
   const linkElement = document.createElement("a");
 
-  const type = document.querySelector("#type");
-  const typeClone = type.cloneNode(true);
-  const status = document.querySelector("#status");
-  const statusClone = status.cloneNode(true);
+  const typeMenu = document.querySelector("#type");
+  const typeMenuClone = typeMenu.cloneNode(true);
+  const statusMenu = document.querySelector("#status");
+  const statusMenuClone = statusMenu.cloneNode(true);
+  let preselectedMenu;
 
   // logic for associating input with cells
   for (let i = 0; i <= mediaList.length - 1; i++) {
@@ -86,13 +87,13 @@ function displayRow(...mediaList) {
       tableCell.className = "link";
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
-      let selectedType = preselect(typeClone, mediaList[i]);
+      preselectedMenu = preselect(typeMenuClone, mediaList[i]);
       tableCell.className = "select";
-      tableCell.appendChild(selectedType);
+      tableCell.appendChild(preselectedMenu);
     } else if (i == 3) {
-      let selectedStatus = preselect(statusClone, mediaList[i]);
+      preselectedMenu = preselect(statusMenuClone, mediaList[i]);
       tableCell.className = "status";
-      tableCell.appendChild(selectedStatus);
+      tableCell.appendChild(preselectedMenu);
     } else {
       tableCell.className = i == 0 ? "title" : "author";
       tableCell.textContent = mediaList[i];
