@@ -79,8 +79,8 @@ function displayRow(...mediaList) {
       let selectedType = preselect(typeClone, mediaList[i]);
       tableCell.appendChild(selectedType);
     } else if (i == 3) {
-      statusClone.id = "";
-      tableCell.appendChild(statusClone);
+      let selectedStatus = preselect(statusClone, mediaList[i]);
+      tableCell.appendChild(selectedStatus);
     } else {
       tableCell.textContent = mediaList[i];
     }
