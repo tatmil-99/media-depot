@@ -31,16 +31,25 @@ function Media(title, author, type, status, link) {
   this.link = link;
 }
 
+function handleKeydown(cell, input) {
+  return (e) => {
+    if (e.key == "Enter") cell.textContent = input.value;
+  };
+}
+
 function editCell(e) {
-  let cell = e.target;
-  let input = document.createElement("input");
+  const input = document.createElement("input");
+  const cell = e.target;
 
-  input.classList.add("edit-field");
-  input.type = "text";
-  input.autofocus = "autofocus";
-  input.value = cell.textContent;
+  if (cell.className == "title" || cell.className == "author") {
+    input.type = "text";
+    input.autofocus = "autofocus";
+    input.value = cell.textContent;
+    input.name = `cell-${cell.className}`;
+    cell.replaceChildren(input);
 
-  cell.replaceChildren(input);
+    document.addEventListener("keydown", handleKeydown(cell, input));
+  }
 }
 
 function preselect(element, option) {
@@ -74,18 +83,22 @@ function displayRow(...mediaList) {
       linkElement.href = mediaList[i];
       linkElement.target = "_blank";
       linkElement.textContent = mediaList[i];
+      tableCell.className = "link";
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
       let selectedType = preselect(typeClone, mediaList[i]);
+      tableCell.className = "select";
       tableCell.appendChild(selectedType);
     } else if (i == 3) {
       let selectedStatus = preselect(statusClone, mediaList[i]);
+      tableCell.className = "status";
       tableCell.appendChild(selectedStatus);
     } else {
+      tableCell.className = i == 0 ? "title" : "author";
       tableCell.textContent = mediaList[i];
     }
 
-    // tableCell.addEventListener("click", editCell);
+    tableCell.addEventListener("click", editCell);
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
