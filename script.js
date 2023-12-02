@@ -52,6 +52,7 @@ function editCell(e) {
   }
 }
 
+// should this go in editCell?
 function preselect(element, option) {
   const nodes = element.childNodes;
 
