@@ -35,7 +35,7 @@ function editCell(associatedObj) {
     const cell = e.target;
     const cellClass = cell.className;
 
-    // updates cell in gui
+    // updates input cells in gui
     if (cellClass == "title" || cellClass == "author") {
       input.type = "text";
       input.autofocus = "autofocus";
@@ -48,7 +48,10 @@ function editCell(associatedObj) {
 
     // updates object
     for (let i = 0; i <= library.length; i++) {
-      if (i == associatedObj) console.log(library[i]);
+      if (i == associatedObj) {
+        library[i].setProperty = { [cellClass]: input.value };
+        console.log(library[i]);
+      }
     }
   };
 }
@@ -116,6 +119,17 @@ function Media(title, author, type, status, link) {
   this.status = status;
   this.link = link;
 }
+
+Media.prototype.setProperty = function (property) {
+  const constructorKeys = Object.keys(this);
+  const propertyKey = Object.keys(property)[0];
+
+  const keyInConstructor = constructorKeys.filter((key) => propertyKey == key);
+
+  if (keyInConstructor.length > 0) {
+    this[keyInConstructor] = property[propertyKey];
+  }
+};
 
 function handleCreation(e) {
   const form = document.querySelector(".media-form");
