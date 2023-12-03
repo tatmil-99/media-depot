@@ -29,9 +29,10 @@ function handleKeydown(cell, input) {
   };
 }
 
-function editInput(e) {
+function editCell(e) {
   const input = document.createElement("input");
   const cell = e.target;
+  console.log("hello");
 
   if (cell.className == "title" || cell.className == "author") {
     input.type = "text";
@@ -44,7 +45,7 @@ function editInput(e) {
   }
 }
 
-function editMenu(element, option) {
+function preselectMenu(element, option) {
   const nodes = element.childNodes;
 
   nodes.forEach((node) => {
@@ -60,6 +61,7 @@ function editMenu(element, option) {
 function displayRow(mediaList, associatedObj) {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
+  tableRow.dataset.id = associatedObj;
   const linkElement = document.createElement("a");
 
   // re-uses dropdown menus
@@ -68,7 +70,7 @@ function displayRow(mediaList, associatedObj) {
   const statusMenu = document.querySelector("#status");
   const statusMenuClone = statusMenu.cloneNode(true);
 
-  let preselectedMenu;
+  let menu;
 
   // logic for associating input with cells
   for (let i = 0; i <= mediaList.length - 1; i++) {
@@ -81,21 +83,20 @@ function displayRow(mediaList, associatedObj) {
       tableCell.className = "link";
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
-      preselectedMenu = editMenu(typeMenuClone, mediaList[i]);
+      menu = preselectMenu(typeMenuClone, mediaList[i]);
       tableCell.className = "select";
-      tableCell.appendChild(preselectedMenu);
+      tableCell.appendChild(menu);
     } else if (i == 3) {
-      preselectedMenu = editMenu(statusMenuClone, mediaList[i]);
+      menu = preselectMenu(statusMenuClone, mediaList[i]);
       tableCell.className = "status";
-      tableCell.appendChild(preselectedMenu);
+      tableCell.appendChild(menu);
     } else {
       tableCell.className = i == 0 ? "title" : "author";
       tableCell.textContent = mediaList[i];
     }
 
-    tableCell.addEventListener("click", editInput);
+    tableCell.addEventListener("click", editCell);
     tableRow.appendChild(tableCell);
-    tableRow.dataset.id = associatedObj;
     tableBody.appendChild(tableRow);
   }
 }
