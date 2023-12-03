@@ -4,7 +4,7 @@ newBtn.addEventListener("click", handleForm);
 const closeBtn = document.querySelector(".close-btn");
 closeBtn.addEventListener("click", handleForm);
 
-const mediaList = [];
+const library = [];
 
 const createBtn = document.querySelector(".form-btn");
 createBtn.addEventListener("click", handleCreation);
@@ -66,7 +66,7 @@ function editMenu(element, option) {
   return element;
 }
 
-function displayRow(...mediaList) {
+function displayRow(mediaList, associatedObj) {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
   const linkElement = document.createElement("a");
@@ -102,6 +102,7 @@ function displayRow(...mediaList) {
 
     tableCell.addEventListener("click", editInput);
     tableRow.appendChild(tableCell);
+    tableRow.dataset.id = associatedObj;
     tableBody.appendChild(tableRow);
   }
 }
@@ -117,9 +118,10 @@ function handleCreation(e) {
   e.preventDefault();
 
   const media = new Media(title, author, type, status, link);
-  mediaList.push(media);
+  library.push(media);
 
-  displayRow(title, author, type, status, link);
+  const associatedObj = library.length - 1;
+  displayRow([title, author, type, status, link], associatedObj);
 
   form.reset();
 }
