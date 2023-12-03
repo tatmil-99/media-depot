@@ -29,20 +29,21 @@ function handleKeydown(cell, input) {
   };
 }
 
-function editCell(e) {
-  const input = document.createElement("input");
-  const cell = e.target;
-  console.log("hello");
+function editCell(associatedObj) {
+  return (e) => {
+    const input = document.createElement("input");
+    const cell = e.target;
 
-  if (cell.className == "title" || cell.className == "author") {
-    input.type = "text";
-    input.autofocus = "autofocus";
-    input.value = cell.textContent;
-    input.name = `cell-${cell.className}`;
-    cell.replaceChildren(input);
+    if (cell.className == "title" || cell.className == "author") {
+      input.type = "text";
+      input.autofocus = "autofocus";
+      input.value = cell.textContent;
+      input.name = `cell-${cell.className}`;
+      cell.replaceChildren(input);
 
-    document.addEventListener("keydown", handleKeydown(cell, input));
-  }
+      document.addEventListener("keydown", handleKeydown(cell, input));
+    }
+  };
 }
 
 function preselectMenu(element, option) {
@@ -95,7 +96,7 @@ function displayRow(mediaList, associatedObj) {
       tableCell.textContent = mediaList[i];
     }
 
-    tableCell.addEventListener("click", editCell);
+    tableCell.addEventListener("click", editCell(associatedObj));
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
