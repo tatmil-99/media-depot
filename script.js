@@ -23,14 +23,6 @@ function handleForm(e) {
   }
 }
 
-function Media(title, author, type, status, link) {
-  this.title = title;
-  this.author = author;
-  this.type = type;
-  this.status = status;
-  this.link = link;
-}
-
 function handleKeydown(cell, input) {
   return (e) => {
     if (e.key == "Enter") cell.textContent = input.value;
@@ -106,6 +98,14 @@ function displayRow(mediaList, associatedObj) {
     tableRow.dataset.id = associatedObj;
     tableBody.appendChild(tableRow);
   }
+}
+
+function Media(title, author, type, status, link) {
+  this.title = title;
+  this.author = author;
+  this.type = type;
+  this.status = status;
+  this.link = link;
 }
 
 function handleCreation(e) {
