@@ -52,7 +52,6 @@ function editInput(e) {
   }
 }
 
-// should this go in editCell?
 function editMenu(element, option) {
   const nodes = element.childNodes;
 
@@ -62,7 +61,7 @@ function editMenu(element, option) {
     }
   });
 
-  element.id = ""; // prevents duplicate id(s) of form menus
+  element.id = ""; // prevents duplicate id(s) of dropdown menus
   return element;
 }
 
@@ -71,10 +70,12 @@ function displayRow(mediaList, associatedObj) {
   const tableRow = document.createElement("tr");
   const linkElement = document.createElement("a");
 
+  // re-uses dropdown menus
   const typeMenu = document.querySelector("#type");
   const typeMenuClone = typeMenu.cloneNode(true);
   const statusMenu = document.querySelector("#status");
   const statusMenuClone = statusMenu.cloneNode(true);
+
   let preselectedMenu;
 
   // logic for associating input with cells
