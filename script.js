@@ -37,7 +37,7 @@ function handleKeydown(cell, input) {
   };
 }
 
-function editCell(e) {
+function editInput(e) {
   const input = document.createElement("input");
   const cell = e.target;
 
@@ -53,7 +53,7 @@ function editCell(e) {
 }
 
 // should this go in editCell?
-function preselect(element, option) {
+function editMenu(element, option) {
   const nodes = element.childNodes;
 
   nodes.forEach((node) => {
@@ -88,11 +88,11 @@ function displayRow(...mediaList) {
       tableCell.className = "link";
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
-      preselectedMenu = preselect(typeMenuClone, mediaList[i]);
+      preselectedMenu = editMenu(typeMenuClone, mediaList[i]);
       tableCell.className = "select";
       tableCell.appendChild(preselectedMenu);
     } else if (i == 3) {
-      preselectedMenu = preselect(statusMenuClone, mediaList[i]);
+      preselectedMenu = editMenu(statusMenuClone, mediaList[i]);
       tableCell.className = "status";
       tableCell.appendChild(preselectedMenu);
     } else {
@@ -100,7 +100,7 @@ function displayRow(...mediaList) {
       tableCell.textContent = mediaList[i];
     }
 
-    tableCell.addEventListener("click", editCell);
+    tableCell.addEventListener("click", editInput);
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
