@@ -33,15 +33,22 @@ function editCell(associatedObj) {
   return (e) => {
     const input = document.createElement("input");
     const cell = e.target;
+    const cellClass = cell.className;
 
-    if (cell.className == "title" || cell.className == "author") {
+    // updates cell in gui
+    if (cellClass == "title" || cellClass == "author") {
       input.type = "text";
       input.autofocus = "autofocus";
       input.value = cell.textContent;
-      input.name = `cell-${cell.className}`;
+      input.name = `cell-${cellClass}`;
       cell.replaceChildren(input);
 
       document.addEventListener("keydown", handleKeydown(cell, input));
+    }
+
+    // updates object
+    for (let i = 0; i <= library.length; i++) {
+      if (i == associatedObj) console.log(library[i]);
     }
   };
 }
