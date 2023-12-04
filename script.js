@@ -38,13 +38,18 @@ function editCell(associatedObj) {
       cell.replaceChildren(input);
 
       // updates object in library after gui edit
-      cell.addEventListener("keydown", (e) => {
+      // note: can unbind this event if i need to
+      // move the event to a parent element to handle menu changes
+      input.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
           cell.textContent = input.value;
 
           for (let i = 0; i <= library.length; i++) {
             if (i == associatedObj) {
+              console.log(cellClass);
+              console.log(library[i]);
               library[i].setProperty({ [cellClass]: input.value });
+              console.log(library[i]);
             }
           }
         }
@@ -121,11 +126,9 @@ Media.prototype.setProperty = function (property) {
   const constructorKeys = Object.keys(this);
   const propertyKey = Object.keys(property)[0];
 
-  const keyInConstructor = constructorKeys.filter((key) => propertyKey == key);
-
-  if (keyInConstructor.length > 0) {
-    this[keyInConstructor] = property[propertyKey];
-  }
+  constructorKeys.forEach((key) => {
+    if (key == propertyKey) this[key] = property[propertyKey];
+  });
 };
 
 function handleCreation(e) {
