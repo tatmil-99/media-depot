@@ -23,19 +23,13 @@ function handleForm(e) {
   }
 }
 
-function handleKeydown(cell, input) {
-  return (e) => {
-    if (e.key == "Enter") cell.textContent = input.value;
-  };
-}
-
 function editCell(associatedObj) {
   return (e) => {
     const input = document.createElement("input");
     const cell = e.target;
     const cellClass = cell.className;
 
-    // updates input cells in gui
+    // displays input for cells in gui
     if (cellClass == "title" || cellClass == "author") {
       input.type = "text";
       input.autofocus = "autofocus";
@@ -43,15 +37,18 @@ function editCell(associatedObj) {
       input.name = `cell-${cellClass}`;
       cell.replaceChildren(input);
 
-      document.addEventListener("keydown", handleKeydown(cell, input));
-    }
+      // updates object in library after gui edit
+      cell.addEventListener("keydown", (e) => {
+        if (e.key == "Enter") {
+          cell.textContent = input.value;
 
-    // updates object
-    for (let i = 0; i <= library.length; i++) {
-      if (i == associatedObj) {
-        library[i].setProperty = { [cellClass]: input.value };
-        console.log(library[i]);
-      }
+          for (let i = 0; i <= library.length; i++) {
+            if (i == associatedObj) {
+              library[i].setProperty({ [cellClass]: input.value });
+            }
+          }
+        }
+      });
     }
   };
 }
