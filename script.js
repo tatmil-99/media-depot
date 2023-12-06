@@ -23,7 +23,7 @@ function handleForm(e) {
   }
 }
 
-function editCell(associatedObj) {
+function editCell(rowDataId) {
   return (e) => {
     const input = document.createElement("input");
     const cell = e.target;
@@ -38,14 +38,13 @@ function editCell(associatedObj) {
       cell.replaceChildren(input);
 
       // updates object in library after gui edit
-      // note: can unbind this event if i need to
-      // move the event to a parent element to handle menu changes
       input.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
+          // unbinds event by removing input and replacing with text
           cell.textContent = input.value;
 
-          for (let i = 0; i <= library.length; i++) {
-            if (i == associatedObj) {
+          for (let i = 0; i <= library.length - 1; i++) {
+            if (i == rowDataId) {
               console.log(cellClass);
               console.log(library[i]);
               library[i].setProperty({ [cellClass]: input.value });
@@ -108,7 +107,7 @@ function displayRow(mediaList, associatedObj) {
       tableCell.textContent = mediaList[i];
     }
 
-    tableCell.addEventListener("click", editCell(associatedObj));
+    tableCell.addEventListener("click", editCell(tableRow.dataset.id));
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
