@@ -29,7 +29,7 @@ function editCell(rowDataId) {
     const cell = e.target;
     const cellClass = cell.className;
 
-    // displays input for cells in gui
+    // displays input element for cells in gui
     if (cellClass == "title" || cellClass == "author") {
       input.type = "text";
       input.autofocus = "autofocus";
@@ -37,7 +37,7 @@ function editCell(rowDataId) {
       input.name = `cell-${cellClass}`;
       cell.replaceChildren(input);
 
-      // updates object in library after gui edit
+      // updates associated object from library after gui edit
       input.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
           // unbinds event by removing input and replacing with text
