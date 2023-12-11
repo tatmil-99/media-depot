@@ -24,6 +24,7 @@ function handleForm(e) {
 }
 
 function editCell(rowDataId) {
+  // creates closure to preserve rowDataId from displayRow()
   return (e) => {
     const input = document.createElement("input");
     const cell = e.target;
