@@ -47,7 +47,7 @@ function editCell(rowDataId) {
             if (i == rowDataId) {
               console.log(cellClass);
               console.log(library[i]);
-              library[i].setProperty({ [cellClass]: input.value });
+              library[i].property = { [cellClass]: input.value };
               console.log(library[i]);
             }
           }
@@ -113,22 +113,26 @@ function displayRow(mediaList, associatedObj) {
   }
 }
 
-function Media(title, author, type, status, link) {
-  this.title = title;
-  this.author = author;
-  this.type = type;
-  this.status = status;
-  this.link = link;
+class Media {
+  constructor(title, author, type, status, link) {
+    this.title = title;
+    this.author = author;
+    this.type = type;
+    this.status = status;
+    this.link = link;
+  }
+
+  set property(obj) {
+    const propertyNames = Object.keys(this);
+    const objName = Object.keys(obj)[0];
+
+    propertyNames.forEach((_name) => {
+      if (_name == objName) {
+        this[_name] = obj[objName];
+      }
+    });
+  }
 }
-
-Media.prototype.setProperty = function (property) {
-  const constructorKeys = Object.keys(this);
-  const propertyKey = Object.keys(property)[0];
-
-  constructorKeys.forEach((key) => {
-    if (key == propertyKey) this[key] = property[propertyKey];
-  });
-};
 
 function handleCreation(e) {
   const form = document.querySelector(".media-form");
