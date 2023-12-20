@@ -37,23 +37,15 @@ function editCell(rowDataId) {
       input.value = cell.textContent;
       input.name = `cell-${cellClass}`;
       cell.replaceChildren(input);
-
-      // updates associated object from library after gui edit
-      input.addEventListener("keydown", (e) => {
-        if (e.key == "Enter") {
-          // unbinds event by removing input and replacing with text
-          cell.textContent = input.value;
-
-          for (let i = 0; i <= library.length - 1; i++) {
-            if (i == rowDataId) {
-              console.log(cellClass);
-              console.log(library[i]);
-              library[i].updateProperty(cellClass, input.value);
-            }
-          }
-        }
-      });
     }
+
+    // updates associated object from library after gui edit
+    input.addEventListener("keydown", (e) => {
+      if (e.key == "Enter") {
+        cell.textContent = input.value; // unbinds event by removing input
+        library[rowDataId].updateProperty(cellClass, input.value);
+      }
+    });
   };
 }
 
