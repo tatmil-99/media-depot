@@ -48,8 +48,7 @@ function editCell(rowDataId) {
             if (i == rowDataId) {
               console.log(cellClass);
               console.log(library[i]);
-              library[i].property = { [cellClass]: input.value };
-              console.log(library[i]);
+              library[i].updateProperty(cellClass, input.value);
             }
           }
         }
@@ -123,15 +122,12 @@ class Media {
     this.link = link;
   }
 
-  set property(obj) {
-    const propertyNames = Object.keys(this);
-    const objName = Object.keys(obj)[0];
-
-    propertyNames.forEach((_name) => {
-      if (_name == objName) {
-        this[_name] = obj[objName];
-      }
-    });
+  updateProperty(property, value) {
+    if (property in this) {
+      if (this[property] == value) return;
+      this[property] = value;
+      console.log(this);
+    }
   }
 }
 
