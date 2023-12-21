@@ -38,6 +38,10 @@ function editCell(rowDataId) {
       cell.replaceChildren(input);
     }
 
+    if (cellClass == "type" || cellClass == "status") {
+      console.log("menu selected");
+    }
+
     // updates associated object from library after gui edit
     input.addEventListener("keydown", (e) => {
       if (e.key == "Enter") {
