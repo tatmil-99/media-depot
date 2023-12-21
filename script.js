@@ -38,8 +38,11 @@ function editCell(rowDataId) {
       cell.replaceChildren(input);
     }
 
+    // detects if a menu has been selected for editing
     if (cellClass == "type" || cellClass == "status") {
-      console.log("menu selected");
+      const menuChildren = cell.children;
+
+      console.log(menuChildren);
     }
 
     // updates associated object from library after gui edit
