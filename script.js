@@ -107,15 +107,14 @@ function displayRow(mediaList, associatedObj) {
       input.type = "text";
       input.value = mediaList[i];
       input.addEventListener("change", (e) => {
-        console.log(e);
+        const property = i == 0 ? "title" : "author";
+        library[associatedObj].updateProperty(property, e.target.value);
         e.target.blur();
       });
+
       tableCell.appendChild(input);
-      // tableCell.className = i == 0 ? "title" : "author";
-      // tableCell.textContent = mediaList[i];
     }
 
-    // tableCell.addEventListener("click", editCell(tableRow.dataset.id));
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
