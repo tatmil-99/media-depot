@@ -42,7 +42,7 @@ function editCell(rowDataId) {
     if (cellClass == "type" || cellClass == "status") {
       const menuChildren = cell.children;
 
-      console.log(menuChildren);
+      console.log(`obj: ${rowDataId}, property: `, menuChildren);
     }
 
     // updates associated object from library after gui edit
@@ -94,7 +94,7 @@ function displayRow(mediaList, associatedObj) {
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
       menu = preselectMenu(typeMenuClone, mediaList[i]);
-      tableCell.className = "select";
+      tableCell.className = "type";
       tableCell.appendChild(menu);
     } else if (i == 3) {
       menu = preselectMenu(statusMenuClone, mediaList[i]);
