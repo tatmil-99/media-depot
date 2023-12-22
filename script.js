@@ -23,41 +23,8 @@ function handleForm(e) {
   }
 }
 
-function editCell(rowDataId) {
-  return (e) => {
-    const input = document.createElement("input");
-    const cell = e.target;
-    const cellClass = cell.className;
-
-    // displays input element for cells in gui
-    if (cellClass == "title" || cellClass == "author") {
-      input.type = "text";
-      input.autofocus = "autofocus";
-      input.value = cell.textContent;
-      input.name = `cell-${cellClass}`;
-      cell.replaceChildren(input);
-    }
-
-    // detects if a menu has been selected for editing
-    if (cellClass == "type" || cellClass == "status") {
-      const menuChildren = cell.children;
-
-      console.log(`obj: ${rowDataId}, property: `, menuChildren);
-    }
-
-    // updates associated object from library after gui edit
-    input.addEventListener("keydown", (e) => {
-      if (e.key == "Enter") {
-        cell.textContent = input.value; // unbinds event by removing input
-        library[rowDataId].updateProperty(cellClass, input.value);
-      }
-    });
-  };
-}
-
 function preselectMenu(element, option) {
   const nodes = element.childNodes;
-
   nodes.forEach((node) => {
     if (node.value == option) {
       node.selected = true;
@@ -65,9 +32,18 @@ function preselectMenu(element, option) {
   });
 
   element.id = ""; // prevents duplicate id(s) of dropdown menus
-  element.addEventListener("input", (e) => console.log(e.target.value));
 
   return element;
+}
+
+function handleMenuEdit(obj, property) {
+  return (e) => {
+    if (property == "type") {
+      library[obj].updateProperty(property, e.target.value);
+    } else if (property == "status") {
+      library[obj].updateProperty(property, e.target.value);
+    }
+  };
 }
 
 function displayRow(mediaList, associatedObj) {
@@ -97,11 +73,11 @@ function displayRow(mediaList, associatedObj) {
       tableCell.appendChild(linkElement);
     } else if (i == 2) {
       menu = preselectMenu(typeMenuClone, mediaList[i]);
-      tableCell.className = "type";
+      menu.addEventListener("input", handleMenuEdit(associatedObj, "type"));
       tableCell.appendChild(menu);
     } else if (i == 3) {
       menu = preselectMenu(statusMenuClone, mediaList[i]);
-      tableCell.className = "status";
+      menu.addEventListener("input", handleMenuEdit(associatedObj, "status"));
       tableCell.appendChild(menu);
     } else {
       input.type = "text";
