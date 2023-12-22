@@ -87,6 +87,7 @@ function displayRow(mediaList, associatedObj) {
   // logic for associating input with cells
   for (let i = 0; i <= mediaList.length - 1; i++) {
     const tableCell = document.createElement("td");
+    const input = document.createElement("input");
 
     if (i == mediaList.length - 1) {
       linkElement.href = mediaList[i];
@@ -103,11 +104,18 @@ function displayRow(mediaList, associatedObj) {
       tableCell.className = "status";
       tableCell.appendChild(menu);
     } else {
-      tableCell.className = i == 0 ? "title" : "author";
-      tableCell.textContent = mediaList[i];
+      input.type = "text";
+      input.value = mediaList[i];
+      input.addEventListener("change", (e) => {
+        console.log(e);
+        e.target.blur();
+      });
+      tableCell.appendChild(input);
+      // tableCell.className = i == 0 ? "title" : "author";
+      // tableCell.textContent = mediaList[i];
     }
 
-    tableCell.addEventListener("click", editCell(tableRow.dataset.id));
+    // tableCell.addEventListener("click", editCell(tableRow.dataset.id));
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
