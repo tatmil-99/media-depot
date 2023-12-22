@@ -65,6 +65,8 @@ function preselectMenu(element, option) {
   });
 
   element.id = ""; // prevents duplicate id(s) of dropdown menus
+  element.addEventListener("input", (e) => console.log(e.target.value));
+
   return element;
 }
 
