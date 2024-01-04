@@ -1,15 +1,4 @@
-const newBtn = document.querySelector(".new-btn");
-newBtn.addEventListener("click", handleForm);
-
-const closeBtn = document.querySelector(".close-btn");
-closeBtn.addEventListener("click", handleForm);
-
-const library = [];
-
-const createBtn = document.querySelector(".form-btn");
-createBtn.addEventListener("click", handleCreation);
-
-function handleForm(e) {
+const handleForm = (e) => {
   const form = document.querySelector(".form-container");
   const container = document.querySelector(".container");
   const btnClass = e.target.className;
@@ -21,9 +10,9 @@ function handleForm(e) {
     form.style.display = "none";
     container.style.filter = "none";
   }
-}
+};
 
-function preselectMenu(element, option) {
+const preselectMenu = (element, option) => {
   const nodes = element.childNodes;
   nodes.forEach((node) => {
     if (node.value == option) {
@@ -34,9 +23,9 @@ function preselectMenu(element, option) {
   element.id = ""; // prevents duplicate id(s) of dropdown menus
 
   return element;
-}
+};
 
-function handleMenuEdit(obj, property) {
+const handleMenuEdit = (obj, property) => {
   return (e) => {
     if (property == "type") {
       library[obj].updateProperty(property, e.target.value);
@@ -44,9 +33,9 @@ function handleMenuEdit(obj, property) {
       library[obj].updateProperty(property, e.target.value);
     }
   };
-}
+};
 
-function displayRow(mediaList, associatedObj) {
+const displayRow = (mediaList, associatedObj) => {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
   tableRow.dataset.id = associatedObj;
@@ -94,7 +83,7 @@ function displayRow(mediaList, associatedObj) {
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
   }
-}
+};
 
 class Media {
   constructor(title, author, type, status, link) {
@@ -114,7 +103,7 @@ class Media {
   }
 }
 
-function handleCreation(e) {
+const handleCreation = (e) => {
   const form = document.querySelector(".media-form");
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
@@ -131,4 +120,15 @@ function handleCreation(e) {
   displayRow([title, author, type, status, link], associatedObj);
 
   form.reset();
-}
+};
+
+const newBtn = document.querySelector(".new-btn");
+newBtn.addEventListener("click", handleForm);
+
+const closeBtn = document.querySelector(".close-btn");
+closeBtn.addEventListener("click", handleForm);
+
+const library = [];
+
+const createBtn = document.querySelector(".form-btn");
+createBtn.addEventListener("click", handleCreation);
