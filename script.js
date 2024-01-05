@@ -34,47 +34,41 @@ const handleMenuEdit = (obj, property) => {
   };
 };
 
-const displayRow = (rowData, associatedObj) => {
+const displayRow = (rowData, rowObject) => {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
-  tableRow.dataset.id = associatedObj;
+  tableRow.dataset.id = rowObject;
   // re-uses dropdown menus
   const typeMenu = document.querySelector("#type");
-  const typeMenuClone = typeMenu.cloneNode(true);
+  const typeNode = typeMenu.cloneNode(true);
   const statusMenu = document.querySelector("#status");
-  const statusMenuClone = statusMenu.cloneNode(true);
+  const statusNode = statusMenu.cloneNode(true);
 
   rowData.forEach((cellValue, index, array) => {
     const tableCell = document.createElement("td");
-    const input = document.createElement("input");
-    const sortedTypeMenu = preselectMenu(typeMenuClone, cellValue);
-    const sortedStatusMenu = preselectMenu(statusMenuClone, cellValue);
-    const linkElement = document.createElement("a");
 
     if (index == array.length - 1) {
+      const linkElement = document.createElement("a");
       linkElement.href = cellValue;
       linkElement.target = "_blank";
       linkElement.textContent = cellValue;
       tableCell.className = "link";
       tableCell.appendChild(linkElement);
     } else if (index == 2) {
-      sortedTypeMenu.addEventListener(
-        "input",
-        handleMenuEdit(associatedObj, "type")
-      );
-      tableCell.appendChild(sortedTypeMenu);
+      const sortedMenu = preselectMenu(typeNode, cellValue);
+      sortedMenu.addEventListener("input", handleMenuEdit(rowObject, "type"));
+      tableCell.appendChild(sortedMenu);
     } else if (index == 3) {
-      sortedStatusMenu.addEventListener(
-        "input",
-        handleMenuEdit(associatedObj, "status")
-      );
-      tableCell.appendChild(sortedStatusMenu);
+      const sortedMenu = preselectMenu(statusNode, cellValue);
+      sortedMenu.addEventListener("input", handleMenuEdit(rowObject, "status"));
+      tableCell.appendChild(sortedMenu);
     } else {
+      const input = document.createElement("input");
       input.type = "text";
       input.value = cellValue;
       input.addEventListener("change", (e) => {
         const property = index == 0 ? "title" : "author";
-        library[associatedObj].updateProperty(property, e.target.value);
+        library[rowObject].updateProperty(property, e.target.value);
         e.target.blur();
       });
       tableCell.appendChild(input);
