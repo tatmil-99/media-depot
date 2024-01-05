@@ -19,12 +19,13 @@ const preselectMenu = (element, option) => {
       node.selected = true;
     }
   });
+
   element.id = ""; // prevents duplicate id(s) of dropdown menus
 
   return element;
 };
 
-const handleMenuEdit = (obj, property) => {
+const menuHandler = (obj, property) => {
   return (e) => {
     if (property == "type") {
       library[obj].updateProperty(property, e.target.value);
@@ -34,7 +35,7 @@ const handleMenuEdit = (obj, property) => {
   };
 };
 
-const handleInputEdit = (obj, index) => {
+const inputHandler = (obj, index) => {
   return (e) => {
     const property = index == 0 ? "title" : "author";
     library[obj].updateProperty(property, e.target.value);
@@ -55,27 +56,35 @@ const displayRow = (rowData, rowObject) => {
   rowData.forEach((cellValue, index, array) => {
     const tableCell = document.createElement("td");
 
-    if (index == array.length - 1) {
-      const linkElement = document.createElement("a");
-      linkElement.href = cellValue;
-      linkElement.target = "_blank";
-      linkElement.textContent = cellValue;
-      tableCell.className = "link";
-      tableCell.appendChild(linkElement);
-    } else if (index == 2) {
-      const sortedMenu = preselectMenu(typeNode, cellValue);
-      sortedMenu.addEventListener("input", handleMenuEdit(rowObject, "type"));
-      tableCell.appendChild(sortedMenu);
-    } else if (index == 3) {
-      const sortedMenu = preselectMenu(statusNode, cellValue);
-      sortedMenu.addEventListener("input", handleMenuEdit(rowObject, "status"));
-      tableCell.appendChild(sortedMenu);
-    } else {
-      const input = document.createElement("input");
-      input.type = "text";
-      input.value = cellValue;
-      input.addEventListener("change", handleInputEdit(rowObject, index));
-      tableCell.appendChild(input);
+    switch (index) {
+      case array.length - 1: {
+        const linkElement = document.createElement("a");
+        linkElement.href = cellValue;
+        linkElement.target = "_blank";
+        linkElement.textContent = cellValue;
+        tableCell.className = "link";
+        tableCell.appendChild(linkElement);
+        break;
+      }
+      case 2: {
+        const sortedMenu = preselectMenu(typeNode, cellValue);
+        sortedMenu.addEventListener("input", menuHandler(rowObject, "type"));
+        tableCell.appendChild(sortedMenu);
+        break;
+      }
+      case 3: {
+        const sortedMenu = preselectMenu(statusNode, cellValue);
+        sortedMenu.addEventListener("input", menuHandler(rowObject, "status"));
+        tableCell.appendChild(sortedMenu);
+        break;
+      }
+      default: {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = cellValue;
+        input.addEventListener("change", inputHandler(rowObject, index));
+        tableCell.appendChild(input);
+      }
     }
 
     tableRow.appendChild(tableCell);
