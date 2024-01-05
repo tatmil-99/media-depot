@@ -34,6 +34,14 @@ const handleMenuEdit = (obj, property) => {
   };
 };
 
+const handleInputEdit = (obj, index) => {
+  return (e) => {
+    const property = index == 0 ? "title" : "author";
+    library[obj].updateProperty(property, e.target.value);
+    e.target.blur();
+  };
+};
+
 const displayRow = (rowData, rowObject) => {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
@@ -66,11 +74,7 @@ const displayRow = (rowData, rowObject) => {
       const input = document.createElement("input");
       input.type = "text";
       input.value = cellValue;
-      input.addEventListener("change", (e) => {
-        const property = index == 0 ? "title" : "author";
-        library[rowObject].updateProperty(property, e.target.value);
-        e.target.blur();
-      });
+      input.addEventListener("change", handleInputEdit(rowObject, index));
       tableCell.appendChild(input);
     }
 
