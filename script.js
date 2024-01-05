@@ -19,7 +19,6 @@ const preselectMenu = (element, option) => {
       node.selected = true;
     }
   });
-
   element.id = ""; // prevents duplicate id(s) of dropdown menus
 
   return element;
@@ -39,19 +38,18 @@ const displayRow = (rowData, associatedObj) => {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
   tableRow.dataset.id = associatedObj;
-  const linkElement = document.createElement("a");
-
   // re-uses dropdown menus
   const typeMenu = document.querySelector("#type");
   const typeMenuClone = typeMenu.cloneNode(true);
   const statusMenu = document.querySelector("#status");
   const statusMenuClone = statusMenu.cloneNode(true);
 
-  let menu;
-
   rowData.forEach((cellValue, index, array) => {
     const tableCell = document.createElement("td");
     const input = document.createElement("input");
+    const sortedTypeMenu = preselectMenu(typeMenuClone, cellValue);
+    const sortedStatusMenu = preselectMenu(statusMenuClone, cellValue);
+    const linkElement = document.createElement("a");
 
     if (index == array.length - 1) {
       linkElement.href = cellValue;
@@ -60,13 +58,17 @@ const displayRow = (rowData, associatedObj) => {
       tableCell.className = "link";
       tableCell.appendChild(linkElement);
     } else if (index == 2) {
-      menu = preselectMenu(typeMenuClone, cellValue);
-      menu.addEventListener("input", handleMenuEdit(associatedObj, "type"));
-      tableCell.appendChild(menu);
+      sortedTypeMenu.addEventListener(
+        "input",
+        handleMenuEdit(associatedObj, "type")
+      );
+      tableCell.appendChild(sortedTypeMenu);
     } else if (index == 3) {
-      menu = preselectMenu(statusMenuClone, cellValue);
-      menu.addEventListener("input", handleMenuEdit(associatedObj, "status"));
-      tableCell.appendChild(menu);
+      sortedStatusMenu.addEventListener(
+        "input",
+        handleMenuEdit(associatedObj, "status")
+      );
+      tableCell.appendChild(sortedStatusMenu);
     } else {
       input.type = "text";
       input.value = cellValue;
