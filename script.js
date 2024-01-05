@@ -35,7 +35,7 @@ const handleMenuEdit = (obj, property) => {
   };
 };
 
-const displayRow = (mediaList, associatedObj) => {
+const displayRow = (rowData, associatedObj) => {
   const tableBody = document.querySelector("tbody");
   const tableRow = document.createElement("tr");
   tableRow.dataset.id = associatedObj;
@@ -49,40 +49,38 @@ const displayRow = (mediaList, associatedObj) => {
 
   let menu;
 
-  // logic for associating input with cells
-  for (let i = 0; i <= mediaList.length - 1; i++) {
+  rowData.forEach((cellValue, index, array) => {
     const tableCell = document.createElement("td");
     const input = document.createElement("input");
 
-    if (i == mediaList.length - 1) {
-      linkElement.href = mediaList[i];
+    if (index == array.length - 1) {
+      linkElement.href = cellValue;
       linkElement.target = "_blank";
-      linkElement.textContent = mediaList[i];
+      linkElement.textContent = cellValue;
       tableCell.className = "link";
       tableCell.appendChild(linkElement);
-    } else if (i == 2) {
-      menu = preselectMenu(typeMenuClone, mediaList[i]);
+    } else if (index == 2) {
+      menu = preselectMenu(typeMenuClone, cellValue);
       menu.addEventListener("input", handleMenuEdit(associatedObj, "type"));
       tableCell.appendChild(menu);
-    } else if (i == 3) {
-      menu = preselectMenu(statusMenuClone, mediaList[i]);
+    } else if (index == 3) {
+      menu = preselectMenu(statusMenuClone, cellValue);
       menu.addEventListener("input", handleMenuEdit(associatedObj, "status"));
       tableCell.appendChild(menu);
     } else {
       input.type = "text";
-      input.value = mediaList[i];
+      input.value = cellValue;
       input.addEventListener("change", (e) => {
-        const property = i == 0 ? "title" : "author";
+        const property = index == 0 ? "title" : "author";
         library[associatedObj].updateProperty(property, e.target.value);
         e.target.blur();
       });
-
       tableCell.appendChild(input);
     }
 
     tableRow.appendChild(tableCell);
     tableBody.appendChild(tableRow);
-  }
+  });
 };
 
 class Media {
